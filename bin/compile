@@ -48,22 +48,6 @@ if [ ! -d "${CACHE_DIR}/xsp" ]; then
 fi
 cp -r "${CACHE_DIR}/xsp" .
 
-# find a solution file
-SLN=$(find . -maxdepth 1 -iname "*.sln")
-if [ $( echo "${SLN}" | wc -l ) -gt 1 ]; then
-  echo "-----> Too many *.sln files"
-  exit 1
-fi
-
-# compile an uploaded application
-if [ "${SLN}" != "" ]; then
-  echo "-----> Compiling Mono application"
-
-  # need Mono in its expected location for xbuild to work
-  ln -s "${CACHE_DIR}/mono" /app
-  export PATH="/app/mono/bin:${PATH}"
-
-  xbuild /property:Configuration=Release ${SLN} | indent
-fi
+echo "Okay doke!"
 
 echo "-----> Build SUCCESS"
